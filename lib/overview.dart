@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ppt/camera.dart';
+import 'package:ppt/thread.dart';
 
 class OverviewPage extends StatefulWidget {
   OverviewPage({Key key, this.title}) : super(key: key);
@@ -12,21 +13,18 @@ class OverviewPage extends StatefulWidget {
 
 class _OverviewPageState extends State<OverviewPage> {
   FocusNode _textNode = new FocusNode();
-  int _keyCode = 0;
+  BuildContext _context;
 
   handleKey(RawKeyEvent key) {
     print("Event runtimeType is ${key.runtimeType}");
     if(key.runtimeType.toString() == 'RawKeyDownEvent'){
-      RawKeyEventDataAndroid data = key.data as RawKeyEventDataAndroid;
-      setState(() {
-        _keyCode = data.keyCode;
-      });
-      print("why does this run twice $_keyCode");
+      Navigator.push(_context, MaterialPageRoute(builder: (conext) => new ThreadView()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     FocusScope.of(context).requestFocus(_textNode);
 
     return RawKeyboardListener(
