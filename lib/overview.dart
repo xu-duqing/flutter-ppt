@@ -18,7 +18,12 @@ class _OverviewPageState extends State<OverviewPage> {
   handleKey(RawKeyEvent key) {
     print("Event runtimeType is ${key.runtimeType}");
     if(key.runtimeType.toString() == 'RawKeyDownEvent'){
-      Navigator.push(_context, MaterialPageRoute(builder: (conext) => new ThreadView()));
+      RawKeyEventDataAndroid data = key.data as RawKeyEventDataAndroid;
+      if (data.keyCode == 12) {
+        Navigator.push(_context, MaterialPageRoute(builder: (conext) => new ThreadView()));
+      } else {
+        Navigator.pop(_context);
+      }
     }
   }
 
