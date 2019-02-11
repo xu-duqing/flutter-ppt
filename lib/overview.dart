@@ -19,7 +19,7 @@ class _OverviewPageState extends State<OverviewPage> {
     print("Event runtimeType is ${key.runtimeType}");
     if(key.runtimeType.toString() == 'RawKeyDownEvent'){
       RawKeyEventDataAndroid data = key.data as RawKeyEventDataAndroid;
-      if (data.keyCode == 12) {
+      if (data.keyCode == 22) {
         Navigator.push(_context, MaterialPageRoute(builder: (conext) => new ThreadView()));
       } else {
         Navigator.pop(_context);
